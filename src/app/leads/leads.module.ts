@@ -1,4 +1,3 @@
-import { LeadsOverviewPageComponent } from './pages/overview/leads.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
@@ -13,6 +12,10 @@ import { LeadFacade } from './services/lead.facade';
 import { LeadEffects } from './store/lead.effects';
 import { leadReducer } from './store/lead.reducer';
 import { LeadEditPageComponent } from './pages/lead-edit/lead-edit.component';
+import { LeadsOverviewPageComponent } from './pages/overview/leads.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -21,12 +24,15 @@ import { LeadEditPageComponent } from './pages/lead-edit/lead-edit.component';
     StoreModule.forFeature('leads', leadReducer),
     EffectsModule.forFeature([LeadEffects]),
     SharedModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   declarations: [
     LeadDetailPageComponent,
     NewLeadPageComponent,
     LeadEditPageComponent,
-    LeadsOverviewPageComponent
+    LeadsOverviewPageComponent,
   ],
   providers: [LeadEffects, LeadService, LeadFacade]
 })
