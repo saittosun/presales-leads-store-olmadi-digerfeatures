@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
-import { SearchComponent } from '../app/search/search.component';
+import { SearchComponent } from './shared/search/search.component';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     DashboardComponent,
     SearchComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -32,7 +32,8 @@ import { MatSortModule } from '@angular/material/sort';
     LeadDetailPageComponent,
     NewLeadPageComponent,
     LeadEditPageComponent,
-    LeadsOverviewPageComponent
+    LeadsOverviewPageComponent,
+
   ],
   providers: [LeadEffects, LeadService, LeadFacade]
 })
