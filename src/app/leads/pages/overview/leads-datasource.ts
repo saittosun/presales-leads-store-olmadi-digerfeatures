@@ -1,3 +1,4 @@
+import { CustomerFacade } from './../../../customers/services/customer.facade';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -11,182 +12,19 @@ import { Customer } from '~types/customer';
 //   id: number;
 // }
 
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: Customer[] = [
-  {
-    id: 1,
-    customername: 'Antwerpen',
-    projectname: 'lijn',
-    status: 'won',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 2,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'BAFO',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 3,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'pitch',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 4,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'offer',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 5,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'ongoing',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 6,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'lost',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 7,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'pitch',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-  {
-    id: 8,
-    customername: 'brussel',
-    projectname: 'renson',
-    status: 'won',
-    date: 'june',
-    firstname: 'Jane',
-    lastname: 'Doe',
-    email: 'test@test.com',
-    phonenumber: 11111111,
-    vat: 11,
-    address: {
-      addressline1: 'kouterbaan',
-      addressline2: 'kouter',
-      city: 'denderleeuw',
-      state: 'oost-vlanderen',
-      country: 'belgie',
-      zip: 9470
-    }
-  },
-];
-
-/**
- * Data source for the Leads view. This class should
- * encapsulate all logic for fetching and manipulating the displayed data
- * (including sorting, pagination, and filtering).
- */
 export class LeadsDataSource extends DataSource<Customer> {
-  data: Customer[] = EXAMPLE_DATA;
+  data: Customer[];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
+  store: CustomerFacade;
 
-  constructor() {
+  constructor(store: CustomerFacade) {
     super();
+    this.store = store;
+    this.store.getCustomers().subscribe(customers => {
+      console.log(customers);
+      this.data = customers;
+    })
   }
 
   /**

@@ -1,3 +1,4 @@
+import { CustomerFacade } from './../../../customers/services/customer.facade';
 import { Customer } from './../../../types/customer';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -19,8 +20,8 @@ export class LeadsOverviewPageComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['project', 'customer', 'status', 'detail'];
 
-  constructor() {
-    this.dataSource = new LeadsDataSource();
+  constructor(private store: CustomerFacade) {
+    this.dataSource = new LeadsDataSource(store);
   }
 
   ngAfterViewInit(): void {
