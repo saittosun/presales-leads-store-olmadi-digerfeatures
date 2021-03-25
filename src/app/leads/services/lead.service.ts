@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
-import { Lead } from '../../types/lead';
+import { Lead } from '~types/lead';
 
 @Injectable()
 export class LeadService {
-  fetchLeads(): Observable<Lead[]>{
+  fetchLeads(): Observable<Lead[]> {
     return of([
       {
         id: "2718d62c-f21d-493c-8717-cfe979927xxx",
@@ -45,4 +45,12 @@ export class LeadService {
       },
     ])
   }
+
+  // updateCustomer(id: number, customer: Lead): Observable<Lead> {
+  //   return of({...customer, id})
+  // }
+
+  // addCustomer(customer: Lead): Observable<Lead>{
+  //   return of({...customer})
+  // }
 }
