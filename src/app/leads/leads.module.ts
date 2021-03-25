@@ -10,7 +10,7 @@ import { NewLeadPageComponent } from './pages/new-lead-form/new-lead-form.compon
 import { LeadService } from './services/lead.service';
 import { LeadFacade } from './services/lead.facade';
 import { LeadEffects } from './store/lead.effects';
-import { leadReducer } from './store/lead.reducer';
+import { leadReducers } from './store/lead.reducer';
 import { LeadEditPageComponent } from './pages/lead-edit/lead-edit.component';
 import { LeadsOverviewPageComponent } from './pages/overview/leads.component';
 import { MatTableModule } from '@angular/material/table';
@@ -21,7 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
   imports: [
     CommonModule,
     LeadsRoutingModule,
-    StoreModule.forFeature('leads', leadReducer),
+    StoreModule.forFeature('leads', leadReducers),
     EffectsModule.forFeature([LeadEffects]),
     SharedModule,
     MatTableModule,
