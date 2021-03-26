@@ -19,14 +19,35 @@
         <input type="text" readonly class="form-control-plaintext" value="{{lead.description}}">
       </div>
     </div>
+    <!-- <app-time-line [status]="currentStatus === {{lead.status}}"></app-time-line> -->
     <p class="lead font-weight-bold">Timeline:</p>
     <ul class="timeline" id="timeline">
-      <li class="li complete"><div class="status"><h4>Lead</h4></div></li>
-      <li class="li complete"><div class="status"><h4>Pitch</h4></div></li>
-      <li class="li complete"><div class="status"><h4>Offer</h4></div></li>
+      <li class="li" [ngClass]="{'complete': lead.status === 'lead'}">
+        <div class="status">
+          <h4>Lead</h4>
+        </div>
+      </li>
+      <li class="li" [ngClass]="{'complete': lead.status === 'pitch'}">
+        <div class="status">
+          <h4>Pitch</h4>
+        </div>
+      </li>
+      <li class="li" [ngClass]="{'complete': lead.status === 'offer'}">
+        <div class="status">
+          <h4>Offer</h4>
+        </div>
+      </li>
       <!-- <li class="li"><div class="status"><h4>Offer Presentation</h4></div></li> -->
-      <li class="li"><div class="status"><h4>BAFO</h4></div></li>
-      <li class="li"><div class="status"><h4>Win/Loss</h4></div></li>
+      <li class="li" [ngClass]="{'complete': lead.status === 'BAFO'}">
+        <div class="status">
+          <h4>BAFO</h4>
+        </div>
+      </li>
+      <li class="li" [ngClass]="{'complete': lead.status === 'won'}">
+        <div class="status">
+          <h4>Won/Loss</h4>
+        </div>
+      </li>
      </ul>
     <a class="btn btn-secondary float-right" (click)="onEdit()" role="button">Edit</a>
   </form>

@@ -26,7 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     SearchComponent,
     NotFoundComponent,
-    SearchComponent
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

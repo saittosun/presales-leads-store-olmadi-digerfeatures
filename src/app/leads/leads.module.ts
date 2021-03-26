@@ -16,6 +16,7 @@ import { LeadsOverviewPageComponent } from './pages/overview/leads.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { TimeLineComponent } from './time-line/time-line.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,7 @@ import { MatSortModule } from '@angular/material/sort';
     NewLeadPageComponent,
     LeadEditPageComponent,
     LeadsOverviewPageComponent,
-
+    TimeLineComponent
   ],
   providers: [LeadEffects, LeadService, LeadFacade]
 })
