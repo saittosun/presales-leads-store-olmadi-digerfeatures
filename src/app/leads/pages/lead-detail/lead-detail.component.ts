@@ -1,8 +1,8 @@
+import { Lead } from './../../../types/lead';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { CustomerFacade } from '~customers/services/customer.facade';
-import { Customer } from '~types/customer';
+import { LeadFacade } from '../../services/lead.facade';
 
 @Component({
   selector: 'app-lead-detail',
@@ -11,24 +11,24 @@ import { Customer } from '~types/customer';
 })
 export class LeadDetailPageComponent implements OnInit , OnDestroy{
   private destroyed$ = new Subject<boolean>();
-  customers: Customer[];
-  customer: Customer;
-  id: number;
+  leads: Lead[];
+  lead: Lead;
+  id: string;
 
-  constructor(private store: CustomerFacade,
+  constructor(private store: LeadFacade,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params.id;
+      this.id = params.id;
     })
-    this.store.getCustomers().subscribe(customers => {
-      this.customers = customers
-      console.log(customers);
+    this.store.getLeads().subscribe(leads => {
+      this.leads = leads
+      console.log(leads);
     })
-    this.customer = this.customers.find(customer => customer.id === this.id)
-    console.log(this.customer);
+    this.lead = this.leads.find(lead => lead.id === this.id)
+    console.log(this.lead);
   }
 
   onEdit() {
