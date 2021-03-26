@@ -14,6 +14,11 @@ import { CustomerFacade } from './services/customer.facade';
 import { CustomerService } from './services/customer.service';
 import { CustomerEffects } from './store/customer.effects';
 import { customerReducers } from './store/customer.reducer';
+import { ProjectsOfCustomerComponent } from './pages/customer-detail/projects-of-customer/projects-of-customer.component';
+import { ProjectsComponent } from './pages/customer-detail/projects/projects.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   imports: [
@@ -22,12 +27,17 @@ import { customerReducers } from './store/customer.reducer';
     StoreModule.forFeature('customers', customerReducers),
     EffectsModule.forFeature([CustomerEffects]),
     SharedModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   declarations: [
     CustomerDetailPageComponent,
     CustomerEditPageComponent,
     NewCustomerPageComponent,
     CustomersOverviewPageComponent,
+    ProjectsOfCustomerComponent,
+    ProjectsComponent,
   ],
   providers: [CustomerEffects, CustomerService, CustomerFacade]
 })
