@@ -1,10 +1,12 @@
-import { CustomerFacade } from './../../../customers/services/customer.facade';
+import { LeadService } from './../../services/lead.service';
+import { LeadFacade } from './../../../leads/services/lead.facade';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
 import { Customer } from '~types/customer';
+import { Lead } from '~types/lead';
 
 // TODO: Replace this with your own data model type
 // export interface Customer {
@@ -12,18 +14,17 @@ import { Customer } from '~types/customer';
 //   id: number;
 // }
 
-export class LeadsDataSource extends DataSource<Customer> {
-  data: Customer[];
+export class LeadsDataSource extends DataSource<Lead> {
+  data: Lead[];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
-  store: CustomerFacade;
+  store: LeadFacade;
 
-  constructor(store: CustomerFacade) {
+  constructor(store: LeadFacade) {
     super();
     this.store = store;
-    this.store.getCustomers().subscribe(customers => {
-      console.log(customers);
-      this.data = customers;
+    this.store.getLeads().subscribe(leads => {
+      this.data = leads;
     })
   }
 
@@ -32,7 +33,7 @@ export class LeadsDataSource extends DataSource<Customer> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Customer[]> {
+  connect(): Observable<Lead[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -55,7 +56,7 @@ export class LeadsDataSource extends DataSource<Customer> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: Customer[]): Customer[] {
+  private getPagedData(data: Lead[]): Lead[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -68,7 +69,7 @@ export class LeadsDataSource extends DataSource<Customer> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: Customer[]): Customer[] {
+  private getSortedData(data: Lead[]): Lead[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -76,8 +77,8 @@ export class LeadsDataSource extends DataSource<Customer> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'project': return compare(a.projectname, b.projectname, isAsc);
-        case 'customer': return compare(a.customername, b.customername, isAsc);
+        case 'project': return compare(a.name, b.name, isAsc);
+        case 'customer': return compare(a.customer, b.customer, isAsc);
         case 'status': return compare(a.status, b.status, isAsc);
         default: return 0;
       }
