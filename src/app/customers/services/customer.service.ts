@@ -14,7 +14,7 @@ export class CustomerService {
     return of([
       {
         id: 1,
-        customername: 'Antwerpen',
+        customername: '34bd4e53-029d-4743-831a-35efc0e003f4',
         projectname: 'Nova',
         status: 'offer',
         date: 'end of june',
@@ -33,8 +33,8 @@ export class CustomerService {
       },
       {
         id: 2,
-        customername: 'Brussel',
-        projectname: 'brussel',
+        customername: 'Digipolis Antwerpen',
+        projectname: 'Antwerpen Morgen',
         status: 'offer',
         date: '11/05/2021',
         firstname: 'Jane',
@@ -52,7 +52,7 @@ export class CustomerService {
       },
       {
         id: 3,
-        customername: 'Brussel',
+        customername: 'Digipolis Antwerpen',
         projectname: 'Nova',
         status: 'BAFO',
         date: '12/05/2022',
@@ -71,7 +71,7 @@ export class CustomerService {
       },
       {
         id: 4,
-        customername: 'Gent',
+        customername: '14bd4e53-029d-4743-831a-35efc0e003f4',
         projectname: 'Nova',
         status: 'offer',
         date: 'end of june',
@@ -90,7 +90,7 @@ export class CustomerService {
       },
       {
         id: 5,
-        customername: 'Brugge',
+        customername: '14bd4e53-029d-4743-831a-35efc0e003f4',
         projectname: 'presales',
         status: 'offer',
         date: 'end of june',

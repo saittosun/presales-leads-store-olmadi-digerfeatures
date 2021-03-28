@@ -27,7 +27,7 @@ export class LeadService {
         pitchDate: "2018-12-16T14:00:000Z",
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
-        customer: "54bd4e53-029d-4743-831a-35efc0e003f4",
+        customer: "Digipolis Antwerpen",
         description: "Short description field \nmulti line text",
         notes: "Notes field for further notes between people working on it"
       },
