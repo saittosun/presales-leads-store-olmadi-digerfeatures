@@ -56,14 +56,6 @@ export class ProjectsOfCustomerComponent implements OnInit, AfterViewInit {
         }
       })
     })
-    // const customerName = this.lead.customer;
-    // this.customerFacade.getCustomers().subscribe(customers => {
-    //   customers.forEach(customer => {
-    //     if(customer.customername === customerName) {
-    //       this.router.navigate(['customers/customer-detail', customer.id])
-    //     }
-    //   })
-    // })
   }
 
 }

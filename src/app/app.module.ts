@@ -18,6 +18,7 @@ import { LeadsModule } from './leads/leads.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './core/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SearchComponent,
     NotFoundComponent,
     SearchComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
