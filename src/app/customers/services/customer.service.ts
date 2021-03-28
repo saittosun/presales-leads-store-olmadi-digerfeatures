@@ -15,7 +15,7 @@ export class CustomerService {
       {
         id: 1,
         customername: '34bd4e53-029d-4743-831a-35efc0e003f4',
-        projectname: 'Nova',
+        projectname: 'renson',
         status: 'offer',
         date: 'end of june',
         firstname: 'Jane',
@@ -72,7 +72,7 @@ export class CustomerService {
       {
         id: 4,
         customername: '14bd4e53-029d-4743-831a-35efc0e003f4',
-        projectname: 'Nova',
+        projectname: 'Mono',
         status: 'offer',
         date: 'end of june',
         firstname: 'Jane',

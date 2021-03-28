@@ -1,5 +1,6 @@
+import { LeadFacade } from './../../../../leads/services/lead.facade';
 import { Customer } from './../../../../types/customer';
-import { ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,7 +27,9 @@ export class ProjectsOfCustomerComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private store: CustomerFacade,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private router: Router,
+              private leadFacade: LeadFacade) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -37,11 +40,30 @@ export class ProjectsOfCustomerComponent implements OnInit, AfterViewInit {
     })
     this.customer = this.customers.find(customer => customer.id === this.id)
     for( const customer of this.customers) {
-      if (customer.projectname === this.customer.projectname) {
+      if (customer.customername === this.customer.customername) {
         this.filteredCustomers.push(customer)
       }
       this.dataSource = new MatTableDataSource(this.filteredCustomers)
     }
+  }
+
+  onHandleProject() {
+    const customerName = this.customer.customername;
+    this.leadFacade.getLeads().subscribe(projects => {
+      projects.forEach(project => {
+        if(project.customer === customerName) {
+          this.router.navigate(['leads/lead-detail', project.id])
+        }
+      })
+    })
+    // const customerName = this.lead.customer;
+    // this.customerFacade.getCustomers().subscribe(customers => {
+    //   customers.forEach(customer => {
+    //     if(customer.customername === customerName) {
+    //       this.router.navigate(['customers/customer-detail', customer.id])
+    //     }
+    //   })
+    // })
   }
 
 }
