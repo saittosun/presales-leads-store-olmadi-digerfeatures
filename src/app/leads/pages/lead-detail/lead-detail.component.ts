@@ -15,6 +15,7 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
   leads: Lead[];
   lead: Lead;
   id: string;
+  leadStatus;
 
   constructor(private store: LeadFacade,
               private route: ActivatedRoute,
@@ -27,10 +28,28 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
     })
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
+
       console.log(leads);
     })
     this.lead = this.leads.find(lead => lead.id === this.id)
     console.log(this.lead);
+      switch(this.lead.status){
+        case 'lead':
+          this.leadStatus = 1;
+          break;
+        case 'pitch':
+          this.leadStatus = 2;
+          break;
+        case 'offer':
+          this.leadStatus = 3;
+          break;
+        case 'BAFO':
+          this.leadStatus = 4;
+          break;
+        case 'won':
+          this.leadStatus = 5;
+          break;
+      }
   }
 
   onHandleCustomer() {
