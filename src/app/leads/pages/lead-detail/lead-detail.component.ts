@@ -5,6 +5,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LeadFacade } from '../../services/lead.facade';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-lead-detail',
@@ -12,7 +14,8 @@ import { LeadFacade } from '../../services/lead.facade';
   styleUrls: ['./lead-detail.component.scss']
 })
 export class LeadDetailPageComponent implements OnInit , OnDestroy{
-  // statusForm : FormControl;
+  statusArray = environment.status;
+  statusForm : FormControl;
   private destroyed$ = new Subject<boolean>();
   leads: Lead[];
   lead: Lead;
@@ -45,7 +48,7 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
     this.timelineData = this.lead.status;
 
     // const status = this.timelineData.array[this.timelineData.index]
-    // this.statusForm = new FormControl(status, Validators.required)
+    this.statusForm = new FormControl(this.timelineData, Validators.required)
   }
 
   onHandleCustomer() {
@@ -60,6 +63,7 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
   }
 
   onStatusChange() {
+    this.timelineData = this.statusForm.value;
     // const lead = this.leads.find(lead => lead.status === this.statusForm.value);
     // this.timelineData.index = this.leads.indexOf(lead)
   }

@@ -1,4 +1,4 @@
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,24 +9,27 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TimeLineComponent implements OnInit {
   statusArray = environment.status;
   @Input() timelineData;
+  convertedStatusArray;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.statusArray.indexOf(this.timelineData));
-console.log(this.timelineData);
+      this.convertedStatusArray = [...this.statusArray]
+      const length = this.convertedStatusArray.length;
+      this.convertedStatusArray[length -2] = this.convertedStatusArray[length -2] + '/' + this.convertedStatusArray[length -1]
+      this.convertedStatusArray.pop()
   }
 
-  // getColor(i) {
-  //   const length = this.timelineData.array.length -1;
-  //   if (this.timelineData.index === length &&
-  //     this.timelineData.array[i] === 'lost') {
-  //       return 'status lost'
-  //     }
-  //   if(this.timelineData.index >= i)
-  //   return 'status complete ';
-  //   else return 'status';
-  // }
+
+  getData(i) {
+    if (i < this.convertedStatusArray.length - 1) {
+      return this.convertedStatusArray[i];
+    } else {
+      if (this.timelineData === 'won' || this.timelineData === 'lost') return this.timelineData
+      const length = this.convertedStatusArray.length;
+      return this.convertedStatusArray[length - 1];
+    }
+  }
 
 }
 

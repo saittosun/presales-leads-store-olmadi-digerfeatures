@@ -1,15 +1,16 @@
 
 <ul class="timeline">
-  <li *ngFor="let lead of statusArray; let i = index"  >
-    <p *ngIf="(timelineData !== 'won'  || 'lost'); else wonLost">{{lead}}</p>
-    <ng-template #wonLost>won/lost</ng-template>
-    <!-- <p *ngIf="(lead === 'won'  || 'lost') && i === statusArray.length - 1">{{timelineData}}</p> -->
-    <div [ngClass]="{'complete' : (statusArray.indexOf(lead) <= statusArray.indexOf(timelineData)) || timelineData === 'won'}" class="status"> </div>
+  <li *ngFor="let lead of convertedStatusArray; let i = index"  >
+
+      <p >{{getData(i)}}</p>
+      <div [ngClass]="{'complete' : (i <= statusArray.indexOf(timelineData) && i < statusArray.length - 2) || timelineData === 'won', 'lost': i === statusArray.length - 1 && timelineData === 'lost'}" class="status"> </div>
+
   </li>
   <li class='last'>
     <div class="status"></div>
   </li>
 </ul>
+
 
 <!-- <ul class="timeline">
   <li *ngFor="let lead of statusArray; let i = index"  >

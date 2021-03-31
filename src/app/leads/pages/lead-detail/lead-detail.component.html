@@ -17,11 +17,11 @@
             {{status}}
           </option>
         </select> -->
-        <!-- <select class="custom-select" (change)="onStatusChange()" name="status" [formControl]="statusForm">
-          <option [value]="status" *ngFor="let status of timelineData">
+        <select class="custom-select" (change)="onStatusChange()" name="status" [formControl]="statusForm">
+          <option [value]="status" *ngFor="let status of statusArray">
             {{status}}
           </option>
-        </select> -->
+        </select>
         <!-- <input type="text" readonly class="form-control-plaintext" value="{{lead.status}}"> -->
       </div>
     </div>
