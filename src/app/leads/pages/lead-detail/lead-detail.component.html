@@ -12,7 +12,12 @@
     <div class="form-group row">
       <label class="col-sm-3 font-weight-bold col-form-label">Status:</label>
       <div class="col-sm-8">
-        <input type="text" readonly class="form-control-plaintext" value="{{lead.status}}">
+        <select class="custom-select" (change)="onStatusChange()" name="status" [formControl]="statusForm">
+          <option [value]="status" *ngFor="let status of timelineData.array">
+            {{status}}
+          </option>
+        </select>
+        <!-- <input type="text" readonly class="form-control-plaintext" value="{{lead.status}}"> -->
       </div>
     </div>
     <div class="form-group row">
@@ -21,44 +26,8 @@
         <input type="text" readonly class="form-control-plaintext" value="{{lead.description}}">
       </div>
     </div>
-    <!-- <app-time-line [status]="currentStatus === {{lead.status}}"></app-time-line> -->
+    <app-time-line [timelineData]="timelineData"></app-time-line>
     <p class="lead font-weight-bold">Timeline:</p>
-    <ul class="timeline" id="timeline">
-      <!-- <li class="complete">
-        <div class="status">
-
-        </div>
-      </li> -->
-      <li class="li" [ngClass]="{'complete': leadStatus >= 1}">
-        <div class="status">
-          <h4>Lead</h4>
-        </div>
-      </li>
-      <li class="li" [ngClass]=" {'complete': leadStatus >= 2}">
-        <div class="status">
-          <h4>Pitch</h4>
-        </div>
-      </li>
-      <li class="li" [ngClass]="{'complete': leadStatus >= 3}">
-        <div class="status">
-          <h4>Offer</h4>
-        </div>
-      </li>
-      <!-- <li class="li"><div class="status"><h4>Offer Presentation</h4></div></li> -->
-      <li class="li"
-      [ngClass]="{'complete': leadStatus >= 4 }">
-        <div class="status">
-          <h4>BAFO</h4>
-        </div>
-      </li>
-      <li class="li"
-      [ngClass]="{'complete': leadStatus >= 5}"
-      >
-        <div class="status">
-          <h4>Won/Loss</h4>
-        </div>
-      </li>
-     </ul>
     <a class="btn btn-secondary float-right" (click)="onEdit()" role="button">Edit</a>
   </form>
 </div>

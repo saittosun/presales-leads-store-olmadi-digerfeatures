@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  status: ['lead', 'pitch', 'offer', 'BAFO', 'won', 'lost']
 };

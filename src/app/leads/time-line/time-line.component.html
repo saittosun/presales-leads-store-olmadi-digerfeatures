@@ -1,28 +1,11 @@
-<!-- <p class="lead font-weight-bold">Timeline:</p>
+
 <ul class="timeline" id="timeline">
-  <li class="li" [ngClass]="{'complete': status === 'lead'}">
-    <div class="status">
-      <h4>Lead</h4>
-    </div>
+  <li *ngFor="let lead of timelineData.array; let i = index" >
+    <p *ngIf="i < timelineData.array.length - 1 || timelineData.index === timelineData.array.length - 1">{{lead}}</p>
+    <p *ngIf="i === timelineData.array.length - 1 && timelineData.index !== timelineData.array.length - 1">win/lost</p>
+    <div [ngClass]="getColor(i)"> </div>
   </li>
-  <li class="li" [ngClass]="{'complete': status === 'pitch'}">
-    <div class="status">
-      <h4>Pitch</h4>
-    </div>
+  <li class='last'>
+    <div class="status"></div>
   </li>
-  <li class="li" [ngClass]="{'complete': status === 'offer'}">
-    <div class="status">
-      <h4>Offer</h4>
-    </div>
-  </li>
-  <li class="li" [ngClass]="{'complete': status === 'BAFO'}">
-    <div class="status">
-      <h4>BAFO</h4>
-    </div>
-  </li>
-  <li class="li" [ngClass]="{'complete': status === 'won'}">
-    <div class="status">
-      <h4>Won/Loss</h4>
-    </div>
-  </li>
- </ul> -->
+</ul>

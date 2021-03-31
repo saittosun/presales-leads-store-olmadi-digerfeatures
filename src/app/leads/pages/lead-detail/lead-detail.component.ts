@@ -1,9 +1,11 @@
+import { FormControl, Validators } from '@angular/forms';
 import { CustomerFacade } from '~customers/services/customer.facade';
 import { Lead } from './../../../types/lead';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LeadFacade } from '../../services/lead.facade';
+import { TimelineData } from '../../time-line/time-line.component';
 
 @Component({
   selector: 'app-lead-detail',
@@ -11,11 +13,12 @@ import { LeadFacade } from '../../services/lead.facade';
   styleUrls: ['./lead-detail.component.scss']
 })
 export class LeadDetailPageComponent implements OnInit , OnDestroy{
+  statusForm : FormControl;
   private destroyed$ = new Subject<boolean>();
   leads: Lead[];
   lead: Lead;
   id: string;
-  leadStatus;
+  timelineData: TimelineData;
 
   constructor(private store: LeadFacade,
               private route: ActivatedRoute,
@@ -28,28 +31,17 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
     })
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
-
-      console.log(leads);
     })
     this.lead = this.leads.find(lead => lead.id === this.id)
-    console.log(this.lead);
-      switch(this.lead.status){
-        case 'lead':
-          this.leadStatus = 1;
-          break;
-        case 'pitch':
-          this.leadStatus = 2;
-          break;
-        case 'offer':
-          this.leadStatus = 3;
-          break;
-        case 'BAFO':
-          this.leadStatus = 4;
-          break;
-        case 'won':
-          this.leadStatus = 5;
-          break;
-      }
+    const statusArray: string[] = []
+    this.leads.forEach(lead => statusArray.push(lead.status))
+    this.timelineData = {
+      array: statusArray,
+      index: this.leads.indexOf(this.lead)
+    };
+
+    const status = this.timelineData.array[this.timelineData.index]
+    this.statusForm = new FormControl(status, Validators.required)
   }
 
   onHandleCustomer() {
@@ -61,6 +53,11 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
         }
       })
     })
+  }
+
+  onStatusChange() {
+    const lead = this.leads.find(lead => lead.status === this.statusForm.value);
+    this.timelineData.index = this.leads.indexOf(lead)
   }
 
   onEdit() {
