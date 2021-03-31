@@ -1,5 +1,28 @@
 
-<ul class="timeline" id="timeline">
+<ul class="timeline">
+  <li *ngFor="let lead of statusArray; let i = index"  >
+    <p *ngIf="(timelineData !== 'won'  || 'lost'); else wonLost">{{lead}}</p>
+    <ng-template #wonLost>won/lost</ng-template>
+    <!-- <p *ngIf="(lead === 'won'  || 'lost') && i === statusArray.length - 1">{{timelineData}}</p> -->
+    <div [ngClass]="{'complete' : (statusArray.indexOf(lead) <= statusArray.indexOf(timelineData)) || timelineData === 'won'}" class="status"> </div>
+  </li>
+  <li class='last'>
+    <div class="status"></div>
+  </li>
+</ul>
+
+<!-- <ul class="timeline">
+  <li *ngFor="let lead of statusArray; let i = index"  >
+    <p *ngIf="(lead !== 'won'  || 'lost') && i !== statusArray.length - 1">{{lead}}</p>
+    <p *ngIf="(lead === 'won'  || 'lost') && i === statusArray.length - 1">{{timelineData}}</p>
+    <div [ngClass]="{'complete' : (statusArray.indexOf(lead) <= statusArray.indexOf(timelineData)) || timelineData === 'won'}" class="status"> </div>
+  </li>
+  <li class='last'>
+    <div class="status"></div>
+  </li>
+</ul> -->
+
+<!-- <ul class="timeline" id="timeline">
   <li *ngFor="let lead of timelineData.array; let i = index" >
     <p *ngIf="i < timelineData.array.length - 1 || timelineData.index === timelineData.array.length - 1">{{lead}}</p>
     <p *ngIf="i === timelineData.array.length - 1 && timelineData.index !== timelineData.array.length - 1">win/lost</p>
@@ -8,4 +31,4 @@
   <li class='last'>
     <div class="status"></div>
   </li>
-</ul>
+</ul> -->

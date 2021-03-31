@@ -12,11 +12,16 @@
     <div class="form-group row">
       <label class="col-sm-3 font-weight-bold col-form-label">Status:</label>
       <div class="col-sm-8">
-        <select class="custom-select" (change)="onStatusChange()" name="status" [formControl]="statusForm">
-          <option [value]="status" *ngFor="let status of timelineData.array">
+        <!-- <select class="custom-select" (change)="onStatusChange()" name="status">
+          <option [value]="status" *ngFor="let status of timelineData">
             {{status}}
           </option>
-        </select>
+        </select> -->
+        <!-- <select class="custom-select" (change)="onStatusChange()" name="status" [formControl]="statusForm">
+          <option [value]="status" *ngFor="let status of timelineData">
+            {{status}}
+          </option>
+        </select> -->
         <!-- <input type="text" readonly class="form-control-plaintext" value="{{lead.status}}"> -->
       </div>
     </div>
@@ -26,8 +31,8 @@
         <input type="text" readonly class="form-control-plaintext" value="{{lead.description}}">
       </div>
     </div>
-    <app-time-line [timelineData]="timelineData"></app-time-line>
     <p class="lead font-weight-bold">Timeline:</p>
+    <app-time-line [timelineData]="timelineData"></app-time-line>
     <a class="btn btn-secondary float-right" (click)="onEdit()" role="button">Edit</a>
   </form>
 </div>

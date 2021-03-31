@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.prod';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -6,26 +7,27 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./time-line.component.scss']
 })
 export class TimeLineComponent implements OnInit {
-  @Input() timelineData: TimelineData;
+  statusArray = environment.status;
+  @Input() timelineData;
 
   constructor() { }
 
-  ngOnInit(): void {}
-
-  getColor(i) {
-    const length = this.timelineData.array.length -1;
-    if (this.timelineData.index === length &&
-      this.timelineData.array[i] === 'lost') {
-        return 'status lost'
-      }
-    if(this.timelineData.index >= i)
-    return 'status complete ';
-    else return 'status';
+  ngOnInit(): void {
+    console.log(this.statusArray.indexOf(this.timelineData));
+console.log(this.timelineData);
   }
 
+  // getColor(i) {
+  //   const length = this.timelineData.array.length -1;
+  //   if (this.timelineData.index === length &&
+  //     this.timelineData.array[i] === 'lost') {
+  //       return 'status lost'
+  //     }
+  //   if(this.timelineData.index >= i)
+  //   return 'status complete ';
+  //   else return 'status';
+  // }
+
 }
 
-export interface TimelineData {
-  index: number;
-  array: string[];
-}
+

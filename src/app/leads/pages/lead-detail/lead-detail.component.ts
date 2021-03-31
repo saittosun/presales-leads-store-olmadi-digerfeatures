@@ -5,7 +5,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LeadFacade } from '../../services/lead.facade';
-import { TimelineData } from '../../time-line/time-line.component';
 
 @Component({
   selector: 'app-lead-detail',
@@ -13,12 +12,13 @@ import { TimelineData } from '../../time-line/time-line.component';
   styleUrls: ['./lead-detail.component.scss']
 })
 export class LeadDetailPageComponent implements OnInit , OnDestroy{
-  statusForm : FormControl;
+  // statusForm : FormControl;
   private destroyed$ = new Subject<boolean>();
   leads: Lead[];
   lead: Lead;
   id: string;
-  timelineData: TimelineData;
+  // timelineData = [];
+  timelineData: string;
 
   constructor(private store: LeadFacade,
               private route: ActivatedRoute,
@@ -33,15 +33,19 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
       this.leads = leads
     })
     this.lead = this.leads.find(lead => lead.id === this.id)
-    const statusArray: string[] = []
-    this.leads.forEach(lead => statusArray.push(lead.status))
-    this.timelineData = {
-      array: statusArray,
-      index: this.leads.indexOf(this.lead)
-    };
+    // const statusArray: string[] = []
+    // this.leads.forEach(lead => statusArray.push(lead.status))
+    // this.timelineData = {
+    //   array: statusArray,
+    //   index: this.leads.indexOf(this.lead)
+    // };
+    // this.leads.forEach(lead => this.timelineData.push(lead.status))
+    // console.log(this.timelineData);
 
-    const status = this.timelineData.array[this.timelineData.index]
-    this.statusForm = new FormControl(status, Validators.required)
+    this.timelineData = this.lead.status;
+
+    // const status = this.timelineData.array[this.timelineData.index]
+    // this.statusForm = new FormControl(status, Validators.required)
   }
 
   onHandleCustomer() {
@@ -56,8 +60,8 @@ export class LeadDetailPageComponent implements OnInit , OnDestroy{
   }
 
   onStatusChange() {
-    const lead = this.leads.find(lead => lead.status === this.statusForm.value);
-    this.timelineData.index = this.leads.indexOf(lead)
+    // const lead = this.leads.find(lead => lead.status === this.statusForm.value);
+    // this.timelineData.index = this.leads.indexOf(lead)
   }
 
   onEdit() {
