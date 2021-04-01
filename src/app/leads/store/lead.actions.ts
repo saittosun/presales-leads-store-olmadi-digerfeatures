@@ -9,6 +9,9 @@ export enum LeadActions {
   setLeads = '[General]: set all Leads',
   setLeadsSuccess = '[General]: set all Leads success',
   setLeadsFailed = '[General]: set all Leads failed',
+  addLead = '[New Lead Form]: add new lead',
+  addLeadSuccess = '[New Lead Form]: add new lead',
+  addLeadFailed = '[New Lead Form]: add new lead'
 }
 
 export const getLeads = createAction(LeadActions.getLeads);
@@ -23,34 +26,20 @@ export const getLeadsFailed = createAction(
   props<{ error: string }>()
 );
 
-// export const updateCustomer = createActionLead.updateCustomer,
-//   props<{customer: Partial<Lead>, id: number}>()
-// )
+export const addLead = createAction(
+  LeadActions.addLead,
+  props<{lead: Lead}>()
+);
 
-// export const updateCustomerSuccess = createAction(
-//   CustomerActions.updateCustomerSuccess,
-//   props<{ customer: Lead }>()
-// );
+export const addLeadSuccess = createAction(
+  LeadActions.addLeadSuccess,
+  props<{ lead: Lead }>()
+);
 
-// export const updateCustomerFailed = createAction(
-//   CustomerActions.updateCustomerFailed,
-//   props<{ error: string }>()
-// );
-
-// export const addCustomer = createAction(
-//   CustomerActions.addCustomer,
-//   props<{customer: Lead}>()
-// );
-
-// export const addCustomerSuccess = createAction(
-//   CustomerActions.addCustomerSuccess,
-//   props<{ customer: Lead }>()
-// );
-
-// export const addCustomerFailed = createAction(
-//   CustomerActions.addCustomerFailed,
-//   props<{ error: string }>()
-// );
+export const addLeadFailed = createAction(
+  LeadActions.addLeadFailed,
+  props<{ error: string }>()
+);
 
 export const setLeads = createAction(
   LeadActions.setLeads,

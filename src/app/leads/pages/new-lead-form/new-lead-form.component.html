@@ -1,4 +1,4 @@
-<form class="container mt-5" [formGroup]="leadNewForm" (ngSubmit)="onSubmit()" novalidate>
+<form class="container" [formGroup]="leadNewForm" (ngSubmit)="onSubmit()" novalidate>
   <div class="row">
     <div class="col-6">
       <h3 class="font-weight-bolder">Lead</h3>
@@ -6,15 +6,15 @@
         <input appInputRef class="form-control" formControlName="leadname" type="text" placeholder="Lead name" />
       </app-with-validation-input>
       <app-with-validation-input [label]="'Customer'" [validations]="{required:'Customer is required'}">
-
-        <select appInputRef class="custom-select" (change)="onStatusChange()" name="status" formControlName="customer" type="text">
-          <option [value]="lead" *ngFor="let lead of leads">
-            {{lead.name}}
+        <input appInputRef class="form-control" formControlName="customer" type="text" placeholder="Customer" list="inputCustomer"/>
+        <datalist id="inputCustomer" type="text">
+          <option *ngFor="let lead of leads">
+            {{lead.customer}}
           </option>
-        </select>
+        </datalist>
       </app-with-validation-input>
       <app-with-validation-input [label]="'status'" [validations]="{required:'status is required'}">
-        <input appInputRef class="form-control" formControlName="status" type="text" placeholder="Status" list="inputStatus"/>
+        <input appInputRef class="form-control" (change)="onStatusChange()" formControlName="status" type="text" placeholder="Status" list="inputStatus"/>
         <datalist id="inputStatus" type="text">
           <option *ngFor="let status of leads">{{status.status}}</option>
         </datalist>
@@ -22,9 +22,9 @@
       <app-with-validation-input [label]="'Description'">
         <textarea appInputRef class="form-control" formControlName="description" type="text" placeholder="Description..."></textarea>
       </app-with-validation-input>
+      <p class="lead font-weight-bold">Timeline:</p>
+      <!-- <app-time-line [timelineData]="timelineData"></app-time-line> -->
     </div>
-    <p class="lead font-weight-bold">Timeline:</p>
-    <app-time-line [timelineData]="timelineData"></app-time-line>
   </div>
   <p class="required">Required field!</p>
   <button type="submit"  class="btn btn-secondary float-right">Submit</button>

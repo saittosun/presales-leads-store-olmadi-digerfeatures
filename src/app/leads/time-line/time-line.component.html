@@ -1,10 +1,7 @@
-
 <ul class="timeline">
-  <li *ngFor="let lead of convertedStatusArray; let i = index"  >
-
-      <p >{{getData(i)}}</p>
-      <div [ngClass]="{'complete' : (i <= statusArray.indexOf(timelineData) && i < statusArray.length - 2) || timelineData === 'won', 'lost': i === statusArray.length - 1 && timelineData === 'lost'}" class="status"> </div>
-
+  <li *ngFor="let lead of statusArray; let i = index">
+    <p>{{lead}}</p>
+    <div [ngClass]="{'complete' : i <= activeStatusIndex}" class="status"> </div>
   </li>
   <li class='last'>
     <div class="status"></div>
@@ -12,24 +9,3 @@
 </ul>
 
 
-<!-- <ul class="timeline">
-  <li *ngFor="let lead of statusArray; let i = index"  >
-    <p *ngIf="(lead !== 'won'  || 'lost') && i !== statusArray.length - 1">{{lead}}</p>
-    <p *ngIf="(lead === 'won'  || 'lost') && i === statusArray.length - 1">{{timelineData}}</p>
-    <div [ngClass]="{'complete' : (statusArray.indexOf(lead) <= statusArray.indexOf(timelineData)) || timelineData === 'won'}" class="status"> </div>
-  </li>
-  <li class='last'>
-    <div class="status"></div>
-  </li>
-</ul> -->
-
-<!-- <ul class="timeline" id="timeline">
-  <li *ngFor="let lead of timelineData.array; let i = index" >
-    <p *ngIf="i < timelineData.array.length - 1 || timelineData.index === timelineData.array.length - 1">{{lead}}</p>
-    <p *ngIf="i === timelineData.array.length - 1 && timelineData.index !== timelineData.array.length - 1">win/lost</p>
-    <div [ngClass]="getColor(i)"> </div>
-  </li>
-  <li class='last'>
-    <div class="status"></div>
-  </li>
-</ul> -->

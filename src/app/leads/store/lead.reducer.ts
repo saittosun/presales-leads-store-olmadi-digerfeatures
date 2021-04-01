@@ -1,7 +1,8 @@
-import { Lead } from './../../types/lead';
+import { Lead } from '~types/lead';
 import { Action, createReducer, on } from "@ngrx/store";
 
 import {
+  addLeadSuccess,
   getLeads,
   getLeadsFailed,
   getLeadsSuccess,
@@ -41,6 +42,15 @@ export const listReducer = createReducer(
     (state: LeadListState, { leads }: {leads: Lead[]}) => ({
       ...state,
       results: leads,
+      loading: false,
+      error: null
+    })
+  ) as any,
+  on(
+    addLeadSuccess,
+    (state: LeadListState, { lead }: {lead: Lead}) => ({
+      ...state,
+      results: state.results.concat(lead),
       loading: false,
       error: null
     })

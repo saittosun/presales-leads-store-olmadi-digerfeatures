@@ -1,3 +1,4 @@
+import { addLead } from './../store/lead.actions';
 import { Lead } from './../../types/lead';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -31,11 +32,8 @@ export class LeadFacade {
     return this.store.select('leads').pipe(map(state => state.list.results));
   }
 
-  // public updateCustomer(id: number, customer: Lead): void {
-  //   this.store.dispatch(updateCustomer({id, customer}))
-  // }
+  public addLead(lead: Lead): void {
+    this.store.dispatch(addLead({lead}))
+  }
 
-  // public addCustomer(customer: Lead): void {
-  //   this.store.dispatch(addCustomer({customer}))
-  // }
 }

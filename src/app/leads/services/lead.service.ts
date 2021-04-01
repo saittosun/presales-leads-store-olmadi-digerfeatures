@@ -82,11 +82,7 @@ export class LeadService {
     ])
   }
 
-  // updateCustomer(id: number, customer: Lead): Observable<Lead> {
-  //   return of({...customer, id})
-  // }
-
-  // addCustomer(customer: Lead): Observable<Lead>{
-  //   return of({...customer})
-  // }
+  addLead(lead: Lead): Observable<Lead>{
+    return of({...lead})
+  }
 }

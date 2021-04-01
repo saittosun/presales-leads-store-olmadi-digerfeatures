@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  status: ['lead', 'pitch', 'offer', 'BAFO', 'won', 'lost']
+  status: ['lead', 'pitch', 'offer', 'BAFO', 'complete'],
 };
 
 /*

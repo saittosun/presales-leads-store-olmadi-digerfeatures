@@ -32,38 +32,6 @@ export class NewCustomerPageComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
-  // save(val) {
-  //   const customer: Customer = {
-  //     id: Date.now(),
-  //     customerName: val.customerName,
-  //     projectName: val.projectName,
-  //     status: null,
-  //     date: null,
-  //     firstName: val.firstName,
-  //     lastName: val.lastName,
-  //     email: val.email,
-  //     phonenumber: val.phonenumber,
-  //     vat: val.vat,
-  //     address: {
-  //       addressline: val.addressline1,
-  //       city: val.city,
-  //       state: val.state,
-  //       country: val.country,
-  //       zip: val.zip
-  //     },
-
-  //   };
-  //   console.log(customer);
-  //   this.store.addCustomer(customer)
-  //   // this.store.updateCustomer(this.id, customer)
-  //   // this.store.saveCustomer(customer);
-  //   console.log(customer.id);
-  //   return customer.id;
-  //   this.customer = customer;
-  //   console.log(customer);
-  //   console.log(this.customer);
-  // }
-
 
   private createForm() {
     this.leadForm = this.fb.group({

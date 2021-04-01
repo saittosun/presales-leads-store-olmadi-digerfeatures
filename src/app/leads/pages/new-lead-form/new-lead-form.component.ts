@@ -1,9 +1,11 @@
+import { LeadService } from './../../services/lead.service';
+import { v4 as uuidv4 } from 'uuid';
 import { Lead } from './../../../types/lead';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { LeadFacade } from '../../services/lead.facade';
-import { LeadService } from '../../services/lead.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -21,14 +23,31 @@ export class NewLeadPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private store: LeadFacade,
+              private router: Router,
+              private route: ActivatedRoute,
               private leadService: LeadService) {}
 
   ngOnInit(): void {
     this.store.getLeads().subscribe(leads => {
+      if(leads.length === 0) {
+        this.leadService.fetchLeads().subscribe(
+          leads => {
+            this.store.setLeads(leads);
+            console.log(leads);
+            this.leads = leads;
+          })
+      } else {
+        this.leads = leads
+      }
       this.leads = leads
-      console.log(this.leads);
     })
     this.createLeadForm()
+  }
+
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   private createLeadForm() {
@@ -41,15 +60,29 @@ export class NewLeadPageComponent implements OnInit {
   }
 
   onStatusChange() {
-
+    this.timelineData = this.leadNewForm.value.status;
   }
 
   onSubmit() {
     this.submitted = true;
-    // if (this.leadNewForm.invalid) {
-    //   alert('You must fill the required fields!');
-    //   return;
-    // }
+    const lead: Lead = {
+      id: uuidv4(),
+      name: this.leadNewForm.value.leadname,
+      status: this.leadNewForm.value.status,
+      customer: this.leadNewForm.value.customer,
+      description: this.leadNewForm.value.description
+    }
+    if (this.leadNewForm.invalid) {
+      alert('You must fill the required fields!');
+      return;
+    }
+
+    console.log(this.leadNewForm.value);
+    console.log(lead);
+    // this.store.addLead(lead);
+    this.router.navigate(['../lead-detail', lead.id], {relativeTo: this.route});
+    this.leadNewForm.reset();
+    this.submitted = false;
   }
 
 
