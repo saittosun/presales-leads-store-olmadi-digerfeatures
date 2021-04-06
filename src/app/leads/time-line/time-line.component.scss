@@ -116,8 +116,8 @@ p {
     }
   }
 
-.lost:last-child {
-  border-top: 2px solid #66DC71;
+.lost {
+  border-top: 2px solid #D6DCE0;
   &::before {
     background-color: red;
   }

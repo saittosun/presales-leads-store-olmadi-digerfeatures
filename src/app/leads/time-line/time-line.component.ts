@@ -20,11 +20,9 @@ export class TimeLineComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.activeStatus || changes.statusArray) {
       this.activeStatusIndex = this.statusArray.indexOf(this.activeStatus)
-      console.log(this.activeStatusIndex);
     }
     if (changes.activeResolution || changes.resolutionArray) {
       this.activeResolutionClass = this.activeResolution
-      console.log(this.activeResolutionClass);
     }
   }
 

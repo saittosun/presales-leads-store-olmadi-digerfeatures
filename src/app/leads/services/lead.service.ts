@@ -25,12 +25,12 @@ export class LeadService {
         name: "Zijn Tijden",
         reference: "A001144",
         status: "lead",
-        resolution: "rejected",
+        resolution: 'ongoing',
         pitchDate: "2018-12-16T14:00:000Z",
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "Digipolis Antwerpen",
-        resolutionComment: "Niet echt ons ding, we hebben geen capaciteit \nvoor deze opdracht en trekken ons terug",
+        resolutionComment: "Het process is going on",
         notes: "Notes field for further notes between people working on it"
       },
       {
