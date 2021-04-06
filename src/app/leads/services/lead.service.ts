@@ -17,7 +17,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "34bd4e53-029d-4743-831a-35efc0e003f4",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "wow!! dat is geweldig!",
         notes: "Notes field for further notes between people working on it"
       },
       {
@@ -30,7 +30,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "Digipolis Antwerpen",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "Niet echt ons ding, we hebben geen capaciteit \nvoor deze opdracht en trekken ons terug",
         notes: "Notes field for further notes between people working on it"
       },
       {
@@ -43,7 +43,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "14bd4e53-029d-4743-831a-35efc0e003f4",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "De andere partijen waren X Y en Z en zij steldden een product voor dat veel goedkoper zou zijn en beter aansloot bij hun wensen",
         notes: "Notes field for further notes between people working on it"
       },
       {
@@ -56,7 +56,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "14bd4e53-029d-4743-831a-35efc0e003f4",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "De andere partijen waren X Y en Z en zij steldden een product voor dat veel goedkoper zou zijn en beter aansloot bij hun wensen",
         notes: "Notes field for further notes between people working on it"
       },
       {
@@ -69,7 +69,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "14bd4e53-029d-4743-831a-35efc0e003f4",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "wow!! dat is geweldig!",
         notes: "Notes field for further notes between people working on it"
       },
       {
@@ -82,7 +82,7 @@ export class LeadService {
         offerDate: "2019-01-07T08:00:000Z",
         offerPresentationDate: "2019-01-10T10:00:000Z",
         customer: "14bd4e53-029d-4743-831a-35efc0e003f4",
-        description: "Short description field \nmulti line text",
+        resolutionComment: "Niet echt ons ding, we hebben geen capaciteit \nvoor deze opdracht en trekken ons terug",
         notes: "Notes field for further notes between people working on it"
       },
     ])

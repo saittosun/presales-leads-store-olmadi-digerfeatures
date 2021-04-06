@@ -116,7 +116,7 @@ p {
     }
   }
 
-.lost {
+.lost:last-child {
   border-top: 2px solid #66DC71;
   &::before {
     background-color: red;

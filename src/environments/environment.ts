@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   status: ['lead', 'pitch', 'offer', 'BAFO', 'complete'],
+  resolution: ['rejected', 'lost', 'won'],
 };
 
 /*

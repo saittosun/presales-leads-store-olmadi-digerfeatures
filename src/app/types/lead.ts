@@ -8,6 +8,6 @@ export interface Lead {
   offerDate?: string;
   offerPresentationDate?: string;
   customer: string;
-  description: string;
+  resolutionComment : string;
   notes?: string;
 }

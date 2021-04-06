@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { CustomerFacade } from '~customers/services/customer.facade';
 import { Lead } from './../../../types/lead';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,18 +14,22 @@ import { environment } from '../../../../environments/environment';
   styleUrls: ['./lead-detail.component.scss']
 })
 export class LeadDetailPageComponent implements OnInit {
-  statusForm : FormControl;
+  statusResolutionForm : FormGroup;
+  resolutionForm : FormControl;
   private destroyed$ = new Subject<boolean>();
   leads: Lead[];
   lead: Lead;
   id: string;
+  activeResolution: string;
+  resolutionArray: string[] = environment.resolution
   activeStatus: string;
   statusArray: string[] = environment.status
 
   constructor(private store: LeadFacade,
               private route: ActivatedRoute,
               private customerFacade: CustomerFacade,
-              private router: Router) { }
+              private router: Router,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -35,8 +39,11 @@ export class LeadDetailPageComponent implements OnInit {
       this.leads = leads
     })
     this.lead = this.leads.find(lead => lead.id === this.id)
+    this.createStatusResolutionForm()
     this.activeStatus = this.lead.status;
-    this.statusForm = new FormControl(this.activeStatus, Validators.required)
+    // this.statusForm = new FormControl(this.activeStatus, Validators.required);
+    this.activeResolution = this.lead.resolution;
+    // this.resolutionForm = new FormControl(this.activeResolution, Validators.required)
   }
 
   onHandleCustomer() {
@@ -50,8 +57,21 @@ export class LeadDetailPageComponent implements OnInit {
     })
   }
 
+  private createStatusResolutionForm() {
+    this.statusResolutionForm = this.fb.group({
+      statusForm: new FormControl(this.lead.status, Validators.required),
+      resolutionForm: new FormControl(this.lead.resolution, Validators.required)
+    })
+  }
+
   onStatusChange() {
-    this.activeStatus = this.statusForm.value;
+    this.activeStatus = this.statusResolutionForm.value.statusForm;
+    console.log(this.activeStatus);
+  }
+
+  onResolutionChange() {
+    this.activeResolution = this.statusResolutionForm.value.resolutionForm;
+    console.log(this.activeResolution);
   }
 
   onEdit() {

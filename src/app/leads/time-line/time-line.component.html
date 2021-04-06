@@ -1,7 +1,7 @@
 <ul class="timeline">
-  <li *ngFor="let lead of statusArray; let i = index">
+  <li *ngFor="let lead of statusArray; let i = index; let last = last">
     <p>{{lead}}</p>
-    <div [ngClass]="{'complete' : i <= activeStatusIndex}" class="status"> </div>
+    <div [ngClass]="{'complete' : i <= activeStatusIndex || (activeResolutionClass === 'won' && last), 'lost' : activeResolutionClass !== 'won' && last}" class="status"> </div>
   </li>
   <li class='last'>
     <div class="status"></div>

@@ -71,7 +71,7 @@ export class NewLeadPageComponent implements OnInit {
       status: this.leadNewForm.value.status,
       resolution: this.leadNewForm.value.resolution,
       customer: this.leadNewForm.value.customer,
-      description: this.leadNewForm.value.description
+      resolutionComment: this.leadNewForm.value.resolutionComment
     }
     if (this.leadNewForm.invalid) {
       alert('You must fill the required fields!');
