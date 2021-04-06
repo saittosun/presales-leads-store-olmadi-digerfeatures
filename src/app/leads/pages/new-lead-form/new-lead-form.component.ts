@@ -69,6 +69,7 @@ export class NewLeadPageComponent implements OnInit {
       id: uuidv4(),
       name: this.leadNewForm.value.leadname,
       status: this.leadNewForm.value.status,
+      resolution: this.leadNewForm.value.resolution,
       customer: this.leadNewForm.value.customer,
       description: this.leadNewForm.value.description
     }

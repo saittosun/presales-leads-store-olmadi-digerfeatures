@@ -3,6 +3,7 @@ export interface Lead {
   name: string;
   reference?: string;
   status: string;
+  resolution: string;
   pitchDate?: string;
   offerDate?: string;
   offerPresentationDate?: string;
