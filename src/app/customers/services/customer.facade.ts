@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { updateCustomer, addCustomer, setCustomers } from './../store/customer.actions';
+import { updateCustomer, addCustomer, setCustomers, getId } from './../store/customer.actions';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -43,5 +43,9 @@ export class CustomerFacade {
 
   public addCustomer(customer: Customer): void {
     this.store.dispatch(addCustomer({customer}))
+  }
+
+  public findId(id: number): void {
+    this.store.dispatch(getId({id}))
   }
 }

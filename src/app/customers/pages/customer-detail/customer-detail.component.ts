@@ -30,6 +30,8 @@ export class CustomerDetailPageComponent implements OnInit {
     })
     this.customer = this.customers.find(customer => customer.id === this.id)
     console.log(this.customer);
+    // const id = this.store.findId(this.id);
+    // console.log(id)
   }
 
   onEdit() {

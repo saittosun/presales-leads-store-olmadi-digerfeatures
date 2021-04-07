@@ -1,16 +1,16 @@
-import { addLead } from '../store/lead.actions';
+import { addLead } from '../leadstore/lead.actions';
 import { Lead } from './../../types/lead';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { setLeads } from '../store/lead.actions';
+import { setLeads } from '../leadstore/lead.actions';
 import {
   LEADS_ERROR,
   LEADS_LOADING
-} from '../store/lead.selectors';
-import { AppLeadState } from '../store/lead.types';
+} from '../leadstore/lead.selectors';
+import { AppLeadState } from '../leadstore/lead.types';
 
 @Injectable()
 export class LeadFacade {

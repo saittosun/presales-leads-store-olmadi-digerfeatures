@@ -15,6 +15,9 @@ export enum CustomerActions {
   setCustomers = '[General]: set all customers',
   setCustomersSuccess = '[General]: set all customers success',
   setCustomersFailed = '[General]: set all customers failed',
+  getId = '[Customers]: get id of customer',
+  getIdSuccess = '[Customers]: get id of customer success',
+  getIdFailed = '[Customers]: get id of customer failed'
 }
 
 export const getCustomers = createAction(CustomerActions.getCustomers);
@@ -28,6 +31,11 @@ export const getCustomersFailed = createAction(
   CustomerActions.getCustomersFailed,
   props<{ error: string }>()
 );
+
+export const getId = createAction(
+  CustomerActions.getId,
+  props<{id: number}>()
+)
 
 export const updateCustomer = createAction(
   CustomerActions.updateCustomer,
