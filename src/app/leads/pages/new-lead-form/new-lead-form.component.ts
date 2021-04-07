@@ -1,3 +1,5 @@
+import { take } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 import { LeadService } from './../../services/lead.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Lead } from './../../../types/lead';
@@ -14,6 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./new-lead-form.component.scss']
 })
 export class NewLeadPageComponent implements OnInit {
+  statusArray: string[] = environment.status;
+  resolutionArray: string[] = environment.resolution
   timelineData: string;
   leadNewForm: FormGroup;
   lead: Lead;
@@ -28,19 +32,22 @@ export class NewLeadPageComponent implements OnInit {
               private leadService: LeadService) {}
 
   ngOnInit(): void {
-    this.store.getLeads().subscribe(leads => {
+    this.store.getLeads().pipe(take(1)).subscribe(leads => {
       if(leads.length === 0) {
-        this.leadService.fetchLeads().subscribe(
-          leads => {
-            this.store.setLeads(leads);
-            console.log(leads);
-            this.leads = leads;
-          })
+        this.leadService.fetchLeads().subscribe(leads => {
+          this.store.setLeads(leads);
+          this.initilazie(leads);
+        })
       } else {
-        this.leads = leads
+        this.initilazie(leads);
       }
-      this.leads = leads
-    })
+    });
+  }
+
+  initilazie(leads) {
+    this.store.getLeads().subscribe(leads =>
+    this.leads = leads)
+    console.log(this.leads);
     this.createLeadForm()
   }
 
@@ -55,12 +62,23 @@ export class NewLeadPageComponent implements OnInit {
       leadname: new FormControl('', Validators.required),
       customer: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      description: new FormControl('')
+      pitchDate: new FormControl('', Validators.required),
+      offerDate: new FormControl('', Validators.required),
+      presantationDate: new FormControl('', Validators.required),
+      resolution: new FormControl('', Validators.required),
+      resolutionComment: new FormControl('', Validators.required),
+      notes: new FormControl('', Validators.required)
     })
   }
 
   onStatusChange() {
     this.timelineData = this.leadNewForm.value.status;
+    console.log(this.timelineData);
+  }
+
+  onResolutionChange() {
+    this.timelineData = this.leadNewForm.value.resolution;
+    console.log(this.timelineData);
   }
 
   onSubmit() {
@@ -71,7 +89,11 @@ export class NewLeadPageComponent implements OnInit {
       status: this.leadNewForm.value.status,
       resolution: this.leadNewForm.value.resolution,
       customer: this.leadNewForm.value.customer,
-      resolutionComment: this.leadNewForm.value.resolutionComment
+      resolutionComment: this.leadNewForm.value.resolutionComment,
+      pitchDate: this.leadNewForm.value.pitchDate,
+      offerDate: this.leadNewForm.value.offerDate,
+      offerPresentationDate: this.leadNewForm.value.presantationDate,
+      notes: this.leadNewForm.value.notes
     }
     if (this.leadNewForm.invalid) {
       alert('You must fill the required fields!');
@@ -80,15 +102,10 @@ export class NewLeadPageComponent implements OnInit {
 
     console.log(this.leadNewForm.value);
     console.log(lead);
-    // this.store.addLead(lead);
+    this.store.addLead(lead);
     this.router.navigate(['../lead-detail', lead.id], {relativeTo: this.route});
     this.leadNewForm.reset();
     this.submitted = false;
   }
-
-
-
-
-
 
 }

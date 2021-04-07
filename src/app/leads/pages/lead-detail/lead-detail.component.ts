@@ -15,7 +15,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class LeadDetailPageComponent implements OnInit {
   statusResolutionForm : FormGroup;
-  resolutionForm : FormControl;
+  // resolutionForm : FormControl;
   private destroyed$ = new Subject<boolean>();
   leads: Lead[];
   lead: Lead;
@@ -32,17 +32,20 @@ export class LeadDetailPageComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params.id;
-    })
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
+      this.route.params.subscribe((params: Params) => {
+        this.id = params.id;
+        console.log(this.id, this.leads);
+        this.lead = this.leads.find(lead => lead.id === this.id)
+        this.createStatusResolutionForm()
+      })
+
     })
-    this.lead = this.leads.find(lead => lead.id === this.id)
-    this.createStatusResolutionForm()
-    this.activeStatus = this.lead.status;
+
+    // this.activeStatus = this.lead.status;
     // this.statusForm = new FormControl(this.activeStatus, Validators.required);
-    this.activeResolution = this.lead.resolution;
+    // this.activeResolution = this.lead.resolution;
     // this.resolutionForm = new FormControl(this.activeResolution, Validators.required)
   }
 
@@ -57,10 +60,17 @@ export class LeadDetailPageComponent implements OnInit {
     })
   }
 
+  // private createStatusResolutionForm() {
+  //   this.statusResolutionForm = this.fb.group({
+  //     statusForm: new FormControl(this.lead.status, Validators.required),
+  //     resolutionForm: new FormControl(this.lead.resolution, Validators.required)
+  //   })
+  // }
+
   private createStatusResolutionForm() {
     this.statusResolutionForm = this.fb.group({
-      statusForm: new FormControl(this.lead.status, Validators.required),
-      resolutionForm: new FormControl(this.lead.resolution, Validators.required)
+      statusForm: new FormControl('', Validators.required),
+      resolutionForm: new FormControl('', Validators.required)
     })
   }
 

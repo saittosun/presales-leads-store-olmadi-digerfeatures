@@ -1,4 +1,4 @@
-import { Lead } from './../../types/lead';
+import { Lead } from '../../types/lead';
 
 import { LeadActions } from './lead.actions';
 
@@ -12,7 +12,7 @@ export interface LeadsState {
   list: LeadListState;
 }
 
-export interface AppState {
+export interface AppLeadState {
   leads: LeadsState;
 }
 

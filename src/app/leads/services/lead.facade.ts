@@ -1,4 +1,4 @@
-import { addLead } from './../store/lead.actions';
+import { addLead } from '../store/lead.actions';
 import { Lead } from './../../types/lead';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
@@ -10,11 +10,11 @@ import {
   LEADS_ERROR,
   LEADS_LOADING
 } from '../store/lead.selectors';
-import { AppState } from '../store/lead.types';
+import { AppLeadState } from '../store/lead.types';
 
 @Injectable()
 export class LeadFacade {
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppLeadState>) { }
 
   public setLeads(leads: Lead[]) {
     this.store.dispatch(setLeads({leads: leads}));

@@ -26,7 +26,9 @@ export const listReducer = createReducer(
   on(
     getLeadsSuccess,
     (state: LeadListState, { results }: any) => ({
-      ...state
+      ...state,
+      loading: false,
+      error: null
     })
   ) as any,
   on(
@@ -63,5 +65,4 @@ function listReducerWrapper(state: LeadListState, action: Action) {
 
 export const leadReducers: any = {
   list: listReducerWrapper
-  // detail: detailReducer,
 };
