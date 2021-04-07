@@ -47,7 +47,7 @@
 
       <mat-form-field appearance="fill" class="required">
         <mat-label>Offer Date</mat-label>
-        <input matInput [matDatepicker]="pickerOffer" formControlName="offerDate">
+        <input matInput [matDatepicker]="pickerOffer" [min]="leadNewForm.get('pitchDate').value" formControlName="offerDate">
         <mat-datepicker-toggle matSuffix [for]="pickerOffer"></mat-datepicker-toggle>
         <mat-datepicker #pickerOffer></mat-datepicker>
         <mat-error *ngIf="leadNewForm.get('offerDate').hasError('required')">
@@ -56,7 +56,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill" class="required">
         <mat-label>Offer Presantation Date</mat-label>
-        <input matInput [matDatepicker]="pickerPresantation" formControlName="presantationDate">
+        <input matInput [matDatepicker]="pickerPresantation" [min]="leadNewForm.get('offerDate').value"  formControlName="presantationDate">
         <mat-datepicker-toggle matSuffix [for]="pickerPresantation"></mat-datepicker-toggle>
         <mat-datepicker #pickerPresantation></mat-datepicker>
         <mat-error *ngIf="leadNewForm.get('presantationDate').hasError('required')">

@@ -67,7 +67,7 @@ export class NewLeadPageComponent implements OnInit {
       presantationDate: new FormControl('', Validators.required),
       resolution: new FormControl('', Validators.required),
       resolutionComment: new FormControl('', Validators.required),
-      notes: new FormControl('', Validators.required)
+      notes: new FormControl('', Validators.required),
     })
   }
 
