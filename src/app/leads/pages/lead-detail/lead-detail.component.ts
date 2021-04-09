@@ -32,16 +32,26 @@ export class LeadDetailPageComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    // this.store.getLeads().subscribe(leads => {
+    //   this.leads = leads
+    //   this.route.params.subscribe((params: Params) => {
+    //     this.id = params.id;
+    //     // console.log(this.id, this.leads);
+    //     this.lead = this.leads.find(lead => lead.id === this.id)
+    //     this.createStatusResolutionForm()
+    //   })
+
+    // })
+    this.route.params.subscribe((params: Params) => {
+      this.id = params.id;
+    })
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
-      this.route.params.subscribe((params: Params) => {
-        this.id = params.id;
-        console.log(this.id, this.leads);
-        this.lead = this.leads.find(lead => lead.id === this.id)
-        this.createStatusResolutionForm()
-      })
-
     })
+    this.lead = this.leads.find(lead => lead.id === this.id),
+    this.createStatusResolutionForm();
+    this.activeStatus = this.lead.status;
+    this.activeResolution = this.lead.resolution;
 
     // this.activeStatus = this.lead.status;
     // this.statusForm = new FormControl(this.activeStatus, Validators.required);
@@ -69,8 +79,8 @@ export class LeadDetailPageComponent implements OnInit {
 
   private createStatusResolutionForm() {
     this.statusResolutionForm = this.fb.group({
-      statusForm: new FormControl('', Validators.required),
-      resolutionForm: new FormControl('', Validators.required)
+      statusForm: new FormControl(this.lead.status, Validators.required),
+      resolutionForm: new FormControl(this.lead.resolution, Validators.required)
     })
   }
 
@@ -85,7 +95,12 @@ export class LeadDetailPageComponent implements OnInit {
   }
 
   onEdit() {
-    //
+    this.router.navigate(['edit'], { relativeTo: this.route });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
 }

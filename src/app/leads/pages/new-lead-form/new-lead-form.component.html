@@ -1,11 +1,11 @@
-<form class="container mt-5 offset-2" [formGroup]="leadNewForm" (ngSubmit)="onSubmit()" novalidate>
+<form class="container mt-5" [formGroup]="leadNewForm" (ngSubmit)="onSubmit()" novalidate>
   <h3 class="font-weight-bolder">New Lead Form</h3>
   <div class="row ">
-    <div class="col-3">
-      <app-with-validation-input class="required" [label]="'Lead Name'" [validations]="{required:'Lead Name is required'}">
+    <div class="col">
+      <app-with-validation-input [label]="'Lead Name'" [validations]="{required:'Lead Name is required'}">
         <input appInputRef class="form-control" formControlName="leadname" type="text" placeholder="Lead name" />
       </app-with-validation-input>
-      <app-with-validation-input class="required" [label]="'Customer'" [validations]="{required:'Customer is required'}">
+      <app-with-validation-input [label]="'Customer'" [validations]="{required:'Customer is required'}">
         <input appInputRef class="form-control" formControlName="customer" type="text" placeholder="Customer" list="inputCustomer"/>
         <datalist id="inputCustomer" type="text">
           <option *ngFor="let lead of leads">
@@ -13,28 +13,29 @@
           </option>
         </datalist>
       </app-with-validation-input>
-      <app-with-validation-input class="required" [label]="'status'" [validations]="{required:'status is required'}">
+      <app-with-validation-input [label]="'status'" [validations]="{required:'status is required'}">
         <input appInputRef class="form-control" (change)="onStatusChange()" formControlName="status" type="text" placeholder="Status" list="inputStatus"/>
         <datalist id="inputStatus" type="text">
-          <option *ngFor="let status of statusArray">{{status}}</option>
+
+
+            <option *ngFor="let status of statusArray">{{status}}</option>
+
         </datalist>
       </app-with-validation-input>
-      <app-with-validation-input class="required" [label]="'resolution'" [validations]="{required:'resolution is required'}">
+      <app-with-validation-input [label]="'resolution'" [validations]="{required:'resolution is required'}">
         <input appInputRef class="form-control" (change)="onResolutionChange()" formControlName="resolution" type="text" placeholder="Resolution" list="inputResolution"/>
         <datalist id="inputResolution" type="text">
-          <option *ngFor="let resolution of resolutionArray">{{resolution}}</option>
+          <option *ngFor="let resolution of resolutionArray" >{{resolution}}</option>
         </datalist>
       </app-with-validation-input>
-    </div>
-    <div class="col-3">
-      <app-with-validation-input class="required" [label]="'Resolution Comment'">
+      <app-with-validation-input *ngIf="leadNewForm.get('resolution').value != 'ongoing'" [label]="'Resolution Comment'">
         <textarea appInputRef class="form-control" formControlName="resolutionComment" type="text" placeholder="Resolution Comment..."></textarea>
       </app-with-validation-input>
-      <app-with-validation-input class="required" [label]="'Notes'">
+      <app-with-validation-input [label]="'Notes'">
         <textarea appInputRef class="form-control" formControlName="notes" type="text" placeholder="Notes"></textarea>
       </app-with-validation-input>
     </div>
-    <div class="col-3">
+    <div class="col">
       <mat-form-field appearance="fill" class="required">
         <mat-label>Pitch Date</mat-label>
         <input matInput [matDatepicker]="pickerPitch" formControlName="pitchDate">

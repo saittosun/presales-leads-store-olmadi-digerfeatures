@@ -1,11 +1,11 @@
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { LeadService } from './../../services/lead.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Lead } from './../../../types/lead';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
 import { LeadFacade } from '../../services/lead.facade';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./new-lead-form.component.scss']
 })
 export class NewLeadPageComponent implements OnInit {
+  defaultStatus = '';
   statusArray: string[] = environment.status;
   resolutionArray: string[] = environment.resolution
   timelineData: string;
@@ -32,24 +33,30 @@ export class NewLeadPageComponent implements OnInit {
               private leadService: LeadService) {}
 
   ngOnInit(): void {
-    this.store.getLeads().pipe(take(1)).subscribe(leads => {
-      if(leads.length === 0) {
-        this.leadService.fetchLeads().subscribe(leads => {
-          this.store.setLeads(leads);
-          this.initilazie(leads);
-        })
-      } else {
-        this.initilazie(leads);
-      }
-    });
-  }
+    // this.store.getLeads().pipe(take(1)).subscribe(leads => {
+    //   if(leads.length === 0) {
+    //     this.leadService.fetchLeads().subscribe(leads => {
+    //       this.store.setLeads(leads);
+    //       this.initilazie(leads);
+    //     })
+    //   } else {
+    //     this.initilazie(leads);
+    //   }
+    // });
 
-  initilazie(leads) {
-    this.store.getLeads().subscribe(leads =>
-    this.leads = leads)
-    console.log(this.leads);
+    // this.store.getLeads().subscribe(leads => this.leads = leads);
+    // console.log(this.leads);
+
+    this.store.getLeads().pipe(takeUntil(this.destroyed$)).subscribe(leads => this.leads = leads)
     this.createLeadForm()
   }
+
+  // initilazie(leads) {
+  //   this.store.getLeads().subscribe(leads =>
+  //   this.leads = leads)
+  //   console.log(this.leads);
+  //   this.createLeadForm()
+  // }
 
 
   ngOnDestroy(): void {
@@ -61,24 +68,22 @@ export class NewLeadPageComponent implements OnInit {
     this.leadNewForm = this.fb.group({
       leadname: new FormControl('', Validators.required),
       customer: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
+      status: new FormControl('lead', Validators.required),
       pitchDate: new FormControl('', Validators.required),
       offerDate: new FormControl('', Validators.required),
       presantationDate: new FormControl('', Validators.required),
-      resolution: new FormControl('', Validators.required),
-      resolutionComment: new FormControl('', Validators.required),
-      notes: new FormControl('', Validators.required),
+      resolution: new FormControl('ongoing', Validators.required),
+      resolutionComment: new FormControl(''),
+      notes: new FormControl(''),
     })
   }
 
   onStatusChange() {
     this.timelineData = this.leadNewForm.value.status;
-    console.log(this.timelineData);
   }
 
   onResolutionChange() {
     this.timelineData = this.leadNewForm.value.resolution;
-    console.log(this.timelineData);
   }
 
   onSubmit() {
@@ -100,9 +105,7 @@ export class NewLeadPageComponent implements OnInit {
       return;
     }
 
-    console.log(this.leadNewForm.value);
-    console.log(lead);
-    this.store.addLead(lead);
+    // this.store.addLead(lead);
     this.router.navigate(['../lead-detail', lead.id], {relativeTo: this.route});
     this.leadNewForm.reset();
     this.submitted = false;
