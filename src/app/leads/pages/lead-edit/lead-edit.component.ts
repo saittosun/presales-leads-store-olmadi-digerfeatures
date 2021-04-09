@@ -42,12 +42,14 @@ export class LeadEditPageComponent implements OnInit {
   }
 
   private createLeadForm() {
+    console.log(this.lead.pitchDate);
+    console.log(new Date(this.lead.pitchDate.slice(0, 10)));
     this.leadNewForm = this.fb.group({
       leadname: new FormControl(this.lead.name, Validators.required),
       customer: new FormControl(this.lead.customer, Validators.required),
       status: new FormControl(this.lead.status, Validators.required),
-      pitchDate: new FormControl(this.lead.pitchDate, Validators.required),
-      offerDate: new FormControl(this.lead.offerDate, Validators.required),
+      pitchDate: new FormControl(new Date(this.lead.pitchDate.slice(0, 10)), Validators.required),
+      offerDate: new FormControl(new Date(this.lead.offerDate.slice(0, 10)), Validators.required),
       presantationDate: new FormControl(this.lead.offerPresentationDate),
       bafoDate: new FormControl(this.lead.bafoDate),
       startDate: new FormControl(this.lead.startDate),
