@@ -48,7 +48,7 @@ export class LeadDetailPageComponent implements OnInit {
     this.store.getLeads().subscribe(leads => {
       this.leads = leads
     })
-    this.lead = this.leads.find(lead => lead.id === this.id),
+    this.lead = this.leads.find(lead => lead.id === this.id)
     this.createStatusResolutionForm();
     this.activeStatus = this.lead.status;
     this.activeResolution = this.lead.resolution;

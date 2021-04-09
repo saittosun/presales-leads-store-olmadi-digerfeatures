@@ -20,6 +20,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './core/footer/footer.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,10 @@ import { FooterComponent } from './core/footer/footer.component';
     SharedModule,
     CustomersModule,
     LeadsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center'
+    }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

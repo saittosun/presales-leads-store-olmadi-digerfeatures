@@ -16,10 +16,7 @@
       <app-with-validation-input [label]="'status'" [validations]="{required:'status is required'}">
         <input appInputRef class="form-control" (change)="onStatusChange()" formControlName="status" type="text" placeholder="Status" list="inputStatus"/>
         <datalist id="inputStatus" type="text">
-
-
-            <option *ngFor="let status of statusArray">{{status}}</option>
-
+          <option *ngFor="let status of statusArray">{{status}}</option>
         </datalist>
       </app-with-validation-input>
       <app-with-validation-input [label]="'resolution'" [validations]="{required:'resolution is required'}">
@@ -55,14 +52,23 @@
           Valid offer date required.
         </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill" class="required">
+      <mat-form-field appearance="fill" class="unrequired">
         <mat-label>Offer Presantation Date</mat-label>
         <input matInput [matDatepicker]="pickerPresantation" [min]="leadNewForm.get('offerDate').value"  formControlName="presantationDate">
         <mat-datepicker-toggle matSuffix [for]="pickerPresantation"></mat-datepicker-toggle>
         <mat-datepicker #pickerPresantation></mat-datepicker>
-        <mat-error *ngIf="leadNewForm.get('presantationDate').hasError('required')">
-          Valid offer presantation date required.
-        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="unrequired">
+        <mat-label>BAFO Date</mat-label>
+        <input matInput [matDatepicker]="pickerBafo" [min]="leadNewForm.get('presantationDate').value"  formControlName="bafoDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerBafo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerBafo></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="unrequired">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="pickerStart" [min]="leadNewForm.get('bafoDate').value"  formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
       </mat-form-field>
     </div>
   </div>

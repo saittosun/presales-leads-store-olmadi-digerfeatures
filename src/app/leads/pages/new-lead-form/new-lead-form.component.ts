@@ -71,7 +71,9 @@ export class NewLeadPageComponent implements OnInit {
       status: new FormControl('lead', Validators.required),
       pitchDate: new FormControl('', Validators.required),
       offerDate: new FormControl('', Validators.required),
-      presantationDate: new FormControl('', Validators.required),
+      presantationDate: new FormControl(''),
+      bafoDate: new FormControl(''),
+      startDate: new FormControl(''),
       resolution: new FormControl('ongoing', Validators.required),
       resolutionComment: new FormControl(''),
       notes: new FormControl(''),
@@ -98,6 +100,8 @@ export class NewLeadPageComponent implements OnInit {
       pitchDate: this.leadNewForm.value.pitchDate,
       offerDate: this.leadNewForm.value.offerDate,
       offerPresentationDate: this.leadNewForm.value.presantationDate,
+      bafoDate: this.leadNewForm.value.bafoDate,
+      startDate: this.leadNewForm.value.startDate,
       notes: this.leadNewForm.value.notes
     }
     if (this.leadNewForm.invalid) {
@@ -105,7 +109,7 @@ export class NewLeadPageComponent implements OnInit {
       return;
     }
 
-    // this.store.addLead(lead);
+    this.store.addLead(lead);
     this.router.navigate(['../lead-detail', lead.id], {relativeTo: this.route});
     this.leadNewForm.reset();
     this.submitted = false;

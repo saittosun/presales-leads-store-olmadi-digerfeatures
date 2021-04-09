@@ -6,6 +6,8 @@ export interface Lead {
   resolution: string;
   pitchDate?: string;
   offerDate?: string;
+  bafoDate?: string;
+  startDate?: string;
   offerPresentationDate?: string;
   customer: string;
   resolutionComment : string;
